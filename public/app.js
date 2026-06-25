@@ -1,5 +1,6 @@
 // 부업 수익 — 핸드폰 전용 단순 버전 (얼마 벌었는지 중심)
 const won = (n) => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
+const cnt = (n) => Number(n || 0).toLocaleString('ko-KR');
 const $ = (s, el = document) => el.querySelector(s);
 
 const RANGE_LABEL = { today: '오늘 번 돈', yesterday: '어제 번 돈', last7: '최근 7일 번 돈', month: '이번 달 번 돈' };
@@ -41,17 +42,24 @@ function renderSummary(data) {
 
 function channelRow(c) {
   const el = document.createElement('div');
-  el.className = 'channel-row';
+  el.className = 'channel-card';
   const tag = c.provider === 'adsense' ? 'adsense' : 'adpost';
   const tagText = c.provider === 'adsense' ? 'AdSense' : 'AdPost';
   const del = c.manual ? `<button class="cr-del" data-del="${c.id}" title="삭제">✕</button>` : '';
   el.innerHTML = `
-    <div class="cr-left">
-      <span class="cr-tag ${tag}">${tagText}</span>
-      <span class="cr-name">${escapeHtml(c.name)}</span>
+    <div class="cr-head">
+      <div class="cr-left">
+        <span class="cr-tag ${tag}">${tagText}</span>
+        <span class="cr-name">${escapeHtml(c.name)}</span>
+      </div>
+      <div class="cr-right">
+        <span class="cr-amt">${won(c.revenue)}</span>${del}
+      </div>
     </div>
-    <div class="cr-right">
-      <span class="cr-amt">${won(c.revenue)}</span>${del}
+    <div class="cr-metrics">
+      <div class="metric views"><div class="label">조회</div><div class="value">${cnt(c.views)}</div></div>
+      <div class="metric visits"><div class="label">방문</div><div class="value">${cnt(c.visits)}</div></div>
+      <div class="metric impressions"><div class="label">노출</div><div class="value">${cnt(c.impressions)}</div></div>
     </div>`;
   const delBtn = el.querySelector('[data-del]');
   if (delBtn) delBtn.addEventListener('click', async () => {

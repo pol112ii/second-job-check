@@ -67,13 +67,13 @@ body {
 .dot.adsense { background: var(--blue); }
 .dot.adpost { background: var(--green); }
 
-/* 채널별 — 이름 + 금액만 */
+/* 채널별 — 이름 + 금액 + 조회/방문/노출 */
 .channels { display: flex; flex-direction: column; gap: 10px; }
-.channel-row {
+.channel-card {
   background: var(--card); border: 1px solid var(--line);
   border-radius: 14px; padding: 16px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
+.cr-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .cr-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .cr-tag { font-size: 10px; padding: 3px 7px; border-radius: 6px; font-weight: 700; flex-shrink: 0; }
 .cr-tag.adsense { background: rgba(91,156,255,.15); color: var(--blue); }
@@ -82,6 +82,17 @@ body {
 .cr-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .cr-amt { font-size: 18px; font-weight: 800; color: var(--green); white-space: nowrap; }
 .cr-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; padding: 4px; }
+
+.cr-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line);
+}
+.metric { text-align: center; }
+.metric .label { font-size: 11px; color: var(--muted); margin-bottom: 5px; }
+.metric .value { font-size: 16px; font-weight: 700; }
+.metric.views .value { color: var(--blue); }
+.metric.visits .value { color: #b18cff; }
+.metric.impressions .value { color: #f5c451; }
 
 #alerts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
 .alert {
@@ -144,6 +155,8 @@ button.ghost-btn {
   background: var(--card-2); border: 1px solid var(--line); color: var(--text);
   padding: 14px; border-radius: 11px; font-size: 17px;
 }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.grid3 input { padding: 11px; font-size: 15px; }
 .seg { display: flex; gap: 6px; background: var(--card-2); padding: 5px; border-radius: 12px; }
 .seg button {
   flex: 1; background: none; border: none; color: var(--muted);
